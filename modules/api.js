@@ -4,8 +4,10 @@ const path = require('path')
 let list = []
 let searching = false
 
-let urlroot = '/'
-let fileroot = path.join(__dirname, '../public/source')
+let config = JSON.parse(fs.readFileSync(path.join(__dirname, '../config.json')))
+
+let urlroot = config.urlroot
+let fileroot = path.join(__dirname, config.fileroot)
 
 function search(root = null, depth = 0) {
 	if (!depth) {
