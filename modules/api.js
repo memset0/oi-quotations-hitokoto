@@ -1,4 +1,5 @@
 const fs = require('fs')
+const url = require('url')
 const path = require('path')
 
 let list = []
@@ -26,7 +27,7 @@ function search(root = null, depth = 0) {
 			fs.stat(dir, (err, sta) => {
 				if (err) throw err;
 				if (sta.isFile()) {
-					tempList.push(encodeURI(path.join(urlroot, 'source', path.relative(fileroot, dir))))
+					tempList.push(encodeURI(url.resolve(urlroot, path.join('source', path.relative(fileroot, dir)))))
 				} else if (sta.isDirectory()) {
 					search(dir, depth + 1)
 				}

@@ -1,4 +1,4 @@
 {
-	"urlroot": "/",
+	"urlroot": "http://example.com",
 	"fileroot": "../public/source"
 }
