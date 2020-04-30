@@ -3,7 +3,9 @@ const path = require('path')
 
 let list = []
 let searching = false
-let rootpath = path.join(__dirname, '../source')
+
+let urlroot = '/'
+let fileroot = path.join(__dirname, '../public/source')
 
 function search(root = null, depth = 0) {
 	if (!depth) {
@@ -12,7 +14,7 @@ function search(root = null, depth = 0) {
 		}
 		searching = true
 		tempList = []
-		root = rootpath
+		root = fileroot
 	}
 	fs.readdir(root, (err, files) => {
 		if (err) throw err;
@@ -22,7 +24,7 @@ function search(root = null, depth = 0) {
 			fs.stat(dir, (err, sta) => {
 				if (err) throw err;
 				if (sta.isFile()) {
-					tempList.push(path.relative(rootpath, dir))
+					tempList.push(encodeURI(path.join(urlroot, 'source', path.relative(fileroot, dir))))
 				} else if (sta.isDirectory()) {
 					search(dir, depth + 1)
 				}
